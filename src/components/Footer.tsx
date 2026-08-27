@@ -1,0 +1,66 @@
+import { Logo } from './Logo'
+
+export function Footer() {
+  return (
+    <footer className="bg-plum-deep text-lavender-100">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr]">
+        <div>
+          <Logo />
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-lavender-200/90">
+            Nourish Naturally — millet chocolate spreads for families who want
+            joy and goodness in every spoon.
+          </p>
+        </div>
+
+        <div>
+          <h3 className="font-display text-sm font-semibold tracking-[0.16em] text-white uppercase">
+            Explore
+          </h3>
+          <ul className="mt-4 space-y-2 text-sm">
+            <li>
+              <a href="#shop" className="hover:text-white">
+                Shop
+              </a>
+            </li>
+            <li>
+              <a href="#benefits" className="hover:text-white">
+                Benefits
+              </a>
+            </li>
+            <li>
+              <a href="#enjoy" className="hover:text-white">
+                Ways to enjoy
+              </a>
+            </li>
+            <li>
+              <a href="#about" className="hover:text-white">
+                About
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="font-display text-sm font-semibold tracking-[0.16em] text-white uppercase">
+            Contact
+          </h3>
+          <ul className="mt-4 space-y-2 text-sm">
+            <li>
+              <a href="mailto:hello@motumo.in" className="hover:text-white">
+                hello@motumo.in
+              </a>
+            </li>
+            <li className="text-lavender-200/80">Made for curious kids &amp; mindful families</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
+        <p className="mx-auto max-w-6xl px-4 py-5 text-center text-xs text-lavender-200/70 sm:px-6 sm:text-left">
+          © {new Date().getFullYear()} Motumo. All rights reserved. Demo storefront for brand
+          reference.
+        </p>
+      </div>
+    </footer>
+  )
+}
