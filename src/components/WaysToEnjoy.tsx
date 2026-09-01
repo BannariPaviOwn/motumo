@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 import { waysToEnjoy } from '../data/products'
+import { assets } from '../lib/assets'
+import { TigerMascot } from './TigerMascot'
 
 function SceneIcon({ kind }: { kind: (typeof waysToEnjoy)[number]['icon'] }) {
   switch (kind) {
@@ -57,8 +59,19 @@ function SceneIcon({ kind }: { kind: (typeof waysToEnjoy)[number]['icon'] }) {
 
 export function WaysToEnjoy() {
   return (
-    <section id="enjoy" className="bg-lavender-50 py-16 sm:py-20" aria-labelledby="enjoy-heading">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section
+      id="enjoy"
+      className="relative overflow-hidden bg-lavender-50 tiger-watermark py-16 sm:py-20"
+      aria-labelledby="enjoy-heading"
+    >
+      <TigerMascot
+        variant="corner"
+        size="sm"
+        peekIn
+        className="absolute bottom-4 left-2 z-10 rotate-[-12deg] opacity-90 sm:bottom-8 sm:left-6"
+        alt=""
+      />
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2
             id="enjoy-heading"
@@ -71,6 +84,20 @@ export function WaysToEnjoy() {
             chocolate joy.
           </p>
         </div>
+
+        <motion.figure
+          className="mx-auto mt-10 max-w-4xl overflow-hidden rounded-[1.75rem] shadow-[0_20px_50px_-28px_rgba(74,44,106,0.5)] ring-1 ring-plum/10"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5 }}
+        >
+          <img
+            src={assets.promo.lifestyleToast}
+            alt="Spreading Motumo Choco Millet Delight on morning toast — perfect for every snack"
+            className="w-full object-cover"
+          />
+        </motion.figure>
 
         <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-5">
           {waysToEnjoy.map((way, index) => (

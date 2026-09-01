@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { products } from '../data/products'
 import { useCart } from '../context/CartContext'
+import { TigerMascot } from './TigerMascot'
 
 function formatINR(value: number) {
   return new Intl.NumberFormat('en-IN', {
@@ -14,8 +15,12 @@ export function Products() {
   const { addItem } = useCart()
 
   return (
-    <section id="shop" className="leaf-pattern py-16 sm:py-20" aria-labelledby="shop-heading">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section
+      id="shop"
+      className="leaf-pattern tiger-watermark relative overflow-hidden py-16 sm:py-20"
+      aria-labelledby="shop-heading"
+    >
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="font-script text-2xl text-choco-soft">Shop Motumo</p>
@@ -26,10 +31,17 @@ export function Products() {
               Millet chocolate spreads
             </h2>
             <p className="mt-2 max-w-xl text-plum-soft">
-              Start with Choco Millet Delight — then stock the pantry with
-              crunchy cocoa and family-ready duo packs.
+              Start with Choco Millet Delight — then try crunchy Choco Millet
+              Fills and our family-ready duo packs.
             </p>
           </div>
+          <TigerMascot
+            variant="float"
+            size="md"
+            peekIn
+            className="mx-auto hidden shrink-0 sm:mx-0 md:block"
+            alt="Motumo tiger says shop the spreads"
+          />
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -52,7 +64,6 @@ export function Products() {
                   src={product.image}
                   alt={product.name}
                   className="mx-auto h-56 w-auto object-contain transition duration-500 group-hover:scale-[1.04] sm:h-64"
-                  style={product.imageFilter ? { filter: product.imageFilter } : undefined}
                 />
               </div>
 

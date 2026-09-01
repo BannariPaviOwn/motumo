@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 56" fill="none" role="img" aria-label="Motumo">
+  <rect x="1" y="6" width="198" height="44" rx="11" fill="#E31C23"/>
+  <text
+    x="100"
+    y="36"
+    text-anchor="middle"
+    fill="#ffffff"
+    font-family="'Fredoka', 'Arial Rounded MT Bold', sans-serif"
+    font-size="26"
+    font-weight="600"
+    letter-spacing="0.02em"
+  >motumo</text>
+  <path
+    d="M28 42C52 47 148 47 172 42"
+    stroke="#6FBF4A"
+    stroke-width="2.5"
+    stroke-linecap="round"
+  />
+  <path
+    d="M158 14C162 10 168 9 173 12"
+    stroke="#6FBF4A"
+    stroke-width="2.2"
+    stroke-linecap="round"
+  />
+  <path
+    d="M163 10C167 8 172 9 175 13"
+    stroke="#6FBF4A"
+    stroke-width="1.8"
+    stroke-linecap="round"
+  />
+  <ellipse cx="171" cy="16" rx="2.2" ry="3.2" fill="#6FBF4A" transform="rotate(-18 171 16)"/>
+  <ellipse cx="176" cy="14.5" rx="2" ry="2.8" fill="#6FBF4A" transform="rotate(12 176 14.5)"/>
+</svg>

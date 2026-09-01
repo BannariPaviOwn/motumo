@@ -1,3 +1,5 @@
+import { assets } from '../lib/assets'
+
 export type Product = {
   id: string
   name: string
@@ -8,7 +10,6 @@ export type Product = {
   badge?: string
   description: string
   image: string
-  imageFilter?: string
   highlights: string[]
 }
 
@@ -23,21 +24,20 @@ export const products: Product[] = [
     badge: 'Bestseller',
     description:
       'A smooth chocolate spread made with millets and 9 nourishing grains. Rich taste kids love — wholesome goodness parents trust.',
-    image: '/assets/choco-millet-delight.png',
+    image: assets.products.chocoMilletDelight,
     highlights: ['Made with 9 grains', 'No artificial colours', 'Safe for kids'],
   },
   {
-    id: 'millet-cocoa-crunch',
-    name: 'Millet Cocoa Crunch',
-    tagline: 'Crunchy millet bites in cocoa bliss',
-    weight: '180g',
-    price: 269,
+    id: 'choco-millet-fills',
+    name: 'Choco Millet Fills',
+    tagline: 'Crunchy millet cereal with cocoa bliss',
+    weight: '250g',
+    price: 279,
     badge: 'New',
     description:
-      'Crunchy millet kernels folded into a cocoa-rich spread — perfect for toast, pancakes, and after-school energy.',
-    image: '/assets/choco-millet-delight.png',
-    imageFilter: 'hue-rotate(-18deg) saturate(1.05)',
-    highlights: ['Rich in millets', 'Source of energy', 'Natural ingredients'],
+      'Crunchy chocolate pillow cereal made with ragi, jowar and foxtail millets — a balanced, tasty morning option straight from the pack or with milk.',
+    image: assets.products.chocoMilletFillsBag,
+    highlights: ['Good source of protein', 'Ragi, jowar & foxtail', 'Crunchy fills'],
   },
   {
     id: 'family-delight-duo',
@@ -49,8 +49,7 @@ export const products: Product[] = [
     badge: 'Value pack',
     description:
       'A shareable duo of Choco Millet Delight — ideal for family breakfasts, gifting, and stocking the pantry with wholesome chocolate joy.',
-    image: '/assets/choco-millet-delight.png',
-    imageFilter: 'saturate(1.1) brightness(1.03)',
+    image: assets.promo.productShowcase,
     highlights: ['No preservatives', 'Supports healthy growth', 'Nourish naturally'],
   },
 ]

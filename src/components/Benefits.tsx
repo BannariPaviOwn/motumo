@@ -1,6 +1,8 @@
 import { Heart, Leaf, Sparkles, Zap } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { benefits, trustPoints } from '../data/products'
+import { assets } from '../lib/assets'
+import { TigerMascot } from './TigerMascot'
 
 const iconMap = {
   leaf: Leaf,
@@ -13,8 +15,19 @@ const iconMap = {
 
 export function Benefits() {
   return (
-    <section id="benefits" className="bg-lavender-50 py-16 sm:py-20" aria-labelledby="benefits-heading">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section
+      id="benefits"
+      className="relative overflow-hidden bg-lavender-50 tiger-watermark py-16 sm:py-20"
+      aria-labelledby="benefits-heading"
+    >
+      <TigerMascot
+        variant="float"
+        size="sm"
+        peekIn
+        className="absolute top-6 right-2 z-10 hidden opacity-95 sm:right-6 sm:block md:top-10 md:right-10"
+        alt=""
+      />
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <p className="font-script text-2xl text-choco-soft">Small jar, big nutrition</p>
           <h2
@@ -57,6 +70,20 @@ export function Benefits() {
             )
           })}
         </div>
+
+        <motion.figure
+          className="mt-12 overflow-hidden rounded-[1.75rem] shadow-[0_16px_50px_-28px_rgba(74,44,106,0.5)] ring-1 ring-plum/10"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.55 }}
+        >
+          <img
+            src={assets.promo.nutrition}
+            alt="Motumo Choco Millet Delight — a powerhouse of wholesome nutrition with sustained energy, digestive wellness, and essential minerals"
+            className="w-full object-cover"
+          />
+        </motion.figure>
 
         <div className="mt-12 grid grid-cols-2 gap-3 rounded-[1.75rem] bg-plum px-4 py-5 text-white sm:grid-cols-4 sm:gap-4 sm:px-8">
           {trustPoints.map((point) => {

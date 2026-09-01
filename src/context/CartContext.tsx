@@ -7,6 +7,7 @@ import {
   type ReactNode,
 } from 'react'
 import { products, type Product } from '../data/products'
+import { playTigerCheer } from '../lib/tigerCheer'
 
 export type CartItem = {
   product: Product
@@ -18,6 +19,8 @@ type CartContextValue = {
   isOpen: boolean
   itemCount: number
   subtotal: number
+  /** Increments on each add — drives tiger cheer UI */
+  cheerId: number
   openCart: () => void
   closeCart: () => void
   addItem: (productId: string) => void
@@ -30,6 +33,7 @@ const CartContext = createContext<CartContextValue | null>(null)
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
   const [isOpen, setIsOpen] = useState(false)
+  const [cheerId, setCheerId] = useState(0)
 
   const openCart = useCallback(() => setIsOpen(true), [])
   const closeCart = useCallback(() => setIsOpen(false), [])
@@ -50,6 +54,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
       return [...prev, { product, quantity: 1 }]
     })
     setIsOpen(true)
+    setCheerId((n) => n + 1)
+    // Click handler = user gesture — audio play() is allowed
+    playTigerCheer()
   }, [])
 
   const removeItem = useCallback((productId: string) => {
@@ -83,6 +90,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       isOpen,
       itemCount,
       subtotal,
+      cheerId,
       openCart,
       closeCart,
       addItem,
@@ -94,6 +102,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       isOpen,
       itemCount,
       subtotal,
+      cheerId,
       openCart,
       closeCart,
       addItem,

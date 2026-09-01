@@ -41,6 +41,38 @@
 }
 
 @layer utilities {
+  .tiger-watermark {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .tiger-watermark::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.07;
+    background-image: url('/assets/tiger-watermark.png');
+    background-repeat: no-repeat;
+    background-position: right -3% bottom 8%;
+    background-size: min(420px, 52vw);
+  }
+
+  .tiger-watermark::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url('/assets/tiger-watermark.png');
+    background-repeat: no-repeat;
+    background-position: left -8% top 10%;
+    background-size: min(300px, 38vw);
+    transform: scaleX(-1);
+  }
+
   .leaf-pattern {
     background-color: var(--color-lavender-100);
     background-image:

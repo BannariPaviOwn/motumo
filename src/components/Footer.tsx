@@ -1,9 +1,17 @@
 import { Logo } from './Logo'
+import { TigerMascot } from './TigerMascot'
 
 export function Footer() {
   return (
-    <footer className="bg-plum-deep text-lavender-100">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr]">
+    <footer className="relative overflow-hidden bg-plum-deep text-lavender-100">
+      <TigerMascot
+        variant="corner"
+        size="sm"
+        monochrome
+        className="absolute right-3 bottom-16 opacity-80 sm:right-8 sm:bottom-20"
+        alt=""
+      />
+      <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr]">
         <div>
           <Logo />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-lavender-200/90">

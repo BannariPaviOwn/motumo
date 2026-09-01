@@ -71,7 +71,7 @@ export function CartDrawer() {
                       <img
                         src={product.image}
                         alt=""
-                        className="h-20 w-20 rounded-xl object-cover bg-lavender-100"
+                        className="h-20 w-20 rounded-xl bg-lavender-100 object-contain p-1"
                       />
                       <div className="min-w-0 flex-1">
                         <div className="flex items-start justify-between gap-2">
