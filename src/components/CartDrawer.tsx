@@ -27,7 +27,7 @@ export function CartDrawer() {
             onClick={closeCart}
           />
           <motion.aside
-            className="fixed top-0 right-0 z-[70] flex h-full w-full max-w-md flex-col bg-lavender-50 shadow-2xl"
+            className="fixed top-0 right-0 z-[70] flex h-full w-full max-w-md flex-col bg-cream shadow-2xl"
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
@@ -56,7 +56,7 @@ export function CartDrawer() {
                   <button
                     type="button"
                     onClick={closeCart}
-                    className="mt-6 rounded-2xl bg-motumo-red px-5 py-2.5 font-display text-sm font-semibold text-white"
+                    className="mt-6 rounded-full bg-motumo-red px-5 py-2.5 font-display text-sm font-semibold text-white"
                   >
                     Continue shopping
                   </button>
@@ -132,7 +132,7 @@ export function CartDrawer() {
                 </div>
                 <button
                   type="button"
-                  className="mt-4 w-full rounded-2xl bg-motumo-red py-3.5 font-display text-sm font-semibold text-white"
+                  className="mt-4 w-full rounded-full bg-motumo-red py-3.5 font-display text-sm font-semibold text-white"
                 >
                   Checkout (demo)
                 </button>

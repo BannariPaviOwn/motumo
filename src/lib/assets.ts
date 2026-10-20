@@ -6,6 +6,12 @@ export const assets = {
     chocoMilletDelightHeritage: '/assets/choco-millet-delight-heritage.png',
     chocoMilletFillsBag: '/assets/choco-millet-fills-bag.png',
     chocoMilletFillsBox: '/assets/choco-millet-fills-box.png',
+    almondSpread: '/assets/almond-spread-delight.png',
+    peanutSpread: '/assets/peanut-spread-delight.png',
+    hazelnutSpread: '/assets/hazelnut-spread-delight.png',
+    almondLabelBack: '/assets/almond-spread-label-back.png',
+    peanutLabelBack: '/assets/peanut-spread-label-back.png',
+    hazelnutLabelBack: '/assets/hazelnut-spread-label-back.png',
   },
   tiger: {
     sitting: '/assets/tiger-sitting.png',

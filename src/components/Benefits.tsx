@@ -17,7 +17,7 @@ export function Benefits() {
   return (
     <section
       id="benefits"
-      className="relative overflow-hidden bg-lavender-50 tiger-watermark py-16 sm:py-20"
+      className="tiger-watermark relative overflow-hidden bg-lavender-50 py-16 sm:py-20"
       aria-labelledby="benefits-heading"
     >
       <TigerMascot
@@ -29,30 +29,30 @@ export function Benefits() {
       />
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="font-script text-2xl text-choco-soft">Small jar, big nutrition</p>
+          <p className="font-script text-2xl text-motumo-red">Small jar, big nutrition</p>
           <h2
             id="benefits-heading"
             className="mt-2 font-display text-3xl font-semibold text-plum sm:text-4xl"
           >
-            Made with 9 grains
+            Filled with goodness
           </h2>
           <p className="mt-3 text-base text-plum-soft sm:text-lg">
-            Motumo brings millets and chocolate together — playful for kids,
+            Motumo spreads bring nuts, millets and chocolate together — playful for kids,
             reassuring for parents.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {benefits.map((benefit, index) => {
             const Icon = iconMap[benefit.icon]
             return (
               <motion.div
                 key={benefit.title}
-                className="rounded-3xl bg-white/80 p-6 text-center shadow-[0_10px_40px_-24px_rgba(74,44,106,0.45)] ring-1 ring-plum/8"
-                initial={{ opacity: 0, y: 20 }}
+                className="rounded-[1.5rem] bg-white p-6 text-center shadow-[0_10px_36px_-22px_rgba(61,26,92,0.4)] ring-1 ring-plum/8"
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.35 }}
-                transition={{ delay: index * 0.08, duration: 0.45 }}
+                transition={{ delay: index * 0.07, duration: 0.4 }}
               >
                 <span
                   className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl"
@@ -60,9 +60,7 @@ export function Benefits() {
                 >
                   <Icon className="h-7 w-7" strokeWidth={2.25} />
                 </span>
-                <h3 className="font-display text-lg font-semibold text-plum">
-                  {benefit.title}
-                </h3>
+                <h3 className="font-display text-lg font-semibold text-plum">{benefit.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-plum-soft">
                   {benefit.description}
                 </p>
@@ -71,21 +69,41 @@ export function Benefits() {
           })}
         </div>
 
-        <motion.figure
-          className="mt-12 overflow-hidden rounded-[1.75rem] shadow-[0_16px_50px_-28px_rgba(74,44,106,0.5)] ring-1 ring-plum/10"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55 }}
-        >
-          <img
-            src={assets.promo.nutrition}
-            alt="Motumo Choco Millet Delight — a powerhouse of wholesome nutrition with sustained energy, digestive wellness, and essential minerals"
-            className="w-full object-cover"
-          />
-        </motion.figure>
+        <div className="mt-12 grid gap-4 md:grid-cols-3">
+          {[
+            {
+              src: assets.products.almondSpread,
+              label: 'Almond',
+              bg: 'bg-[#e8f5b8]',
+            },
+            {
+              src: assets.products.peanutSpread,
+              label: 'Peanut',
+              bg: 'bg-motumo-yellow/60',
+            },
+            {
+              src: assets.products.hazelnutSpread,
+              label: 'Hazelnut',
+              bg: 'bg-[#d4b5a0]/50',
+            },
+          ].map((item) => (
+            <figure
+              key={item.label}
+              className={`overflow-hidden rounded-[1.5rem] ${item.bg} px-4 pt-6 pb-4 text-center ring-1 ring-plum/8`}
+            >
+              <img
+                src={item.src}
+                alt={`Motumo ${item.label} Spread Delight`}
+                className="mx-auto h-44 w-auto object-contain sm:h-52"
+              />
+              <figcaption className="mt-3 font-display text-sm font-semibold text-plum">
+                {item.label} Spread Delight
+              </figcaption>
+            </figure>
+          ))}
+        </div>
 
-        <div className="mt-12 grid grid-cols-2 gap-3 rounded-[1.75rem] bg-plum px-4 py-5 text-white sm:grid-cols-4 sm:gap-4 sm:px-8">
+        <div className="mt-12 grid grid-cols-2 gap-3 rounded-[1.5rem] bg-plum px-4 py-5 text-white sm:grid-cols-4 sm:gap-4 sm:px-8">
           {trustPoints.map((point) => {
             const Icon = iconMap[point.icon]
             return (
@@ -93,7 +111,7 @@ export function Benefits() {
                 key={point.label}
                 className="flex flex-col items-center gap-2 text-center sm:flex-row sm:text-left"
               >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/12">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-motumo-yellow/20 text-motumo-yellow">
                   <Icon className="h-5 w-5" />
                 </span>
                 <span className="font-display text-xs font-semibold tracking-wide sm:text-sm">

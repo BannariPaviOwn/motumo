@@ -15,13 +15,13 @@ export function Footer() {
         <div>
           <Logo />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-lavender-200/90">
-            Nourish Naturally — millet chocolate spreads for families who want
-            joy and goodness in every spoon.
+            Nourish Naturally — nut &amp; millet chocolate spreads for families who want joy and
+            goodness in every spoon.
           </p>
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-semibold tracking-[0.16em] text-white uppercase">
+          <h3 className="font-display text-sm font-semibold tracking-[0.16em] text-motumo-yellow uppercase">
             Explore
           </h3>
           <ul className="mt-4 space-y-2 text-sm">
@@ -31,13 +31,18 @@ export function Footer() {
               </a>
             </li>
             <li>
-              <a href="#benefits" className="hover:text-white">
-                Benefits
+              <a href="#new" className="hover:text-white">
+                New launches
               </a>
             </li>
             <li>
-              <a href="#enjoy" className="hover:text-white">
-                Ways to enjoy
+              <a href="#benefits" className="hover:text-white">
+                Why Motumo
+              </a>
+            </li>
+            <li>
+              <a href="#reviews" className="hover:text-white">
+                Reviews
               </a>
             </li>
             <li>
@@ -49,7 +54,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-semibold tracking-[0.16em] text-white uppercase">
+          <h3 className="font-display text-sm font-semibold tracking-[0.16em] text-motumo-yellow uppercase">
             Contact
           </h3>
           <ul className="mt-4 space-y-2 text-sm">

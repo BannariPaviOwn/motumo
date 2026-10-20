@@ -1,28 +1,27 @@
-import { About } from './components/About'
-import { Benefits } from './components/Benefits'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { CartDrawer } from './components/CartDrawer'
-import { Footer } from './components/Footer'
-import { Hero } from './components/Hero'
-import { Products } from './components/Products'
+import { ScrollToTop } from './components/ScrollToTop'
+import { TemplateSwitcher } from './components/TemplateSwitcher'
 import { TigerCheerOverlay } from './components/TigerCheerOverlay'
-import { WaysToEnjoy } from './components/WaysToEnjoy'
 import { CartProvider } from './context/CartContext'
+import { Template1 } from './templates/Template1'
+import { Template2 } from './templates/Template2'
+import { Template3 } from './templates/Template3'
 
 export default function App() {
   return (
-    <CartProvider>
-      <div className="min-h-svh">
-        <main>
-          <Hero />
-          <Benefits />
-          <Products />
-          <WaysToEnjoy />
-          <About />
-        </main>
-        <Footer />
+    <BrowserRouter>
+      <CartProvider>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Template1 />} />
+          <Route path="/template2" element={<Template2 />} />
+          <Route path="/template3" element={<Template3 />} />
+        </Routes>
         <CartDrawer />
         <TigerCheerOverlay />
-      </div>
-    </CartProvider>
+        <TemplateSwitcher />
+      </CartProvider>
+    </BrowserRouter>
   )
 }
