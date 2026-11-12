@@ -1,7 +1,10 @@
 import { Logo } from './Logo'
 import { TigerMascot } from './TigerMascot'
+import { useOrders } from '../context/OrdersContext'
 
 export function Footer() {
+  const { openOrdersPanel, orders } = useOrders()
+
   return (
     <footer className="relative overflow-hidden bg-plum-deep text-lavender-100">
       <TigerMascot
@@ -64,6 +67,15 @@ export function Footer() {
               </a>
             </li>
             <li className="text-lavender-200/80">Made for curious kids &amp; mindful families</li>
+            <li>
+              <button
+                type="button"
+                onClick={openOrdersPanel}
+                className="text-left text-motumo-yellow hover:text-white"
+              >
+                Dev: Test Orders{orders.length > 0 ? ` (${orders.length})` : ''}
+              </button>
+            </li>
           </ul>
         </div>
       </div>

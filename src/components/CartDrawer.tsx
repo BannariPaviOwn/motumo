@@ -1,17 +1,12 @@
-import { Minus, Plus, X } from 'lucide-react'
+import { FlaskConical, Minus, Plus, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCart } from '../context/CartContext'
-
-function formatINR(value: number) {
-  return new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
-    maximumFractionDigits: 0,
-  }).format(value)
-}
+import { useOrders } from '../context/OrdersContext'
+import { formatINR } from '../lib/orders'
 
 export function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, setQuantity, subtotal } = useCart()
+  const { openCheckout } = useOrders()
 
   return (
     <AnimatePresence>
@@ -132,10 +127,15 @@ export function CartDrawer() {
                 </div>
                 <button
                   type="button"
-                  className="mt-4 w-full rounded-full bg-motumo-red py-3.5 font-display text-sm font-semibold text-white"
+                  onClick={openCheckout}
+                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-motumo-red py-3.5 font-display text-sm font-semibold text-white"
                 >
-                  Checkout (demo)
+                  <FlaskConical className="h-4 w-4" />
+                  Checkout (Test)
                 </button>
+                <p className="mt-2 text-center text-[11px] text-plum-soft">
+                  Dev payment · no live gateway
+                </p>
               </div>
             )}
           </motion.aside>
