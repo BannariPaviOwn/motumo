@@ -14,13 +14,14 @@ export function Logo({
   variant = 'default',
 }: LogoProps) {
   return (
-    <span className={`inline-flex items-center gap-3 ${className}`}>
+    <span className={`inline-flex items-center gap-2.5 sm:gap-3 ${className}`}>
       <img
         src={assets.logo}
         alt="Motumo"
-        className="h-9 w-auto sm:h-10"
-        width={200}
-        height={56}
+        className="h-10 w-auto max-w-[9.5rem] object-contain object-left sm:h-11 sm:max-w-[11rem]"
+        width={277}
+        height={104}
+        decoding="async"
         draggable={false}
       />
 

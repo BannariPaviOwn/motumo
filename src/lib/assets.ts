@@ -1,6 +1,8 @@
 /** Central paths for Motumo brand assets served from /public/assets */
 export const assets = {
-  logo: '/assets/logo-motumo.svg',
+  logo: '/assets/motumo-logo.svg',
+  logoPng: '/assets/motumo-logo.png',
+  logoWebp: '/assets/motumo-logo.webp',
   products: {
     chocoMilletDelight: '/assets/choco-millet-delight.png',
     chocoMilletDelightHeritage: '/assets/choco-millet-delight-heritage.png',
