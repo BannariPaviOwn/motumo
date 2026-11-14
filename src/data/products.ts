@@ -1,5 +1,17 @@
 import { assets } from '../lib/assets'
 
+/** Catalog / admin category ids stored on each product. */
+export const PRODUCT_CATEGORIES = [
+  { id: 'spreads', label: 'Spreads' },
+  { id: 'millets', label: 'Millets' },
+  { id: 'combos', label: 'Combos' },
+  { id: 'gift-packs', label: 'Gift Packs' },
+  { id: 'limited', label: 'Limited' },
+  { id: 'other', label: 'Other' },
+] as const
+
+export type ProductCategoryId = (typeof PRODUCT_CATEGORIES)[number]['id']
+
 export type Product = {
   id: string
   name: string
@@ -12,6 +24,25 @@ export type Product = {
   image: string
   accent: string
   highlights: string[]
+  /** Shop / admin category (seed + custom). */
+  category: ProductCategoryId
+  /** Free-text label when category is `other`. */
+  categoryLabel?: string
+  /** When true, apply discountPercent to `price` for the effective selling price. */
+  discountEnabled: boolean
+  /** Percent off (1–100) applied when discountEnabled. */
+  discountPercent: number
+  /** Whether the SKU is shown on the public shop. Overridable via admin/localStorage. */
+  active: boolean
+}
+
+export function getCategoryLabel(product: Pick<Product, 'category' | 'categoryLabel'>): string {
+  if (product.category === 'other' && product.categoryLabel?.trim()) {
+    return product.categoryLabel.trim()
+  }
+  return (
+    PRODUCT_CATEGORIES.find((c) => c.id === product.category)?.label ?? 'Other'
+  )
 }
 
 export const products: Product[] = [
@@ -28,6 +59,10 @@ export const products: Product[] = [
     image: assets.products.almondSpread,
     accent: '#c8e86a',
     highlights: ['Rich in protein', 'Rich in fiber', '100% gluten free'],
+    category: 'spreads',
+    discountEnabled: false,
+    discountPercent: 0,
+    active: true,
   },
   {
     id: 'peanut-spread-delight',
@@ -42,6 +77,10 @@ export const products: Product[] = [
     image: assets.products.peanutSpread,
     accent: '#ffd54a',
     highlights: ['Rich in protein', 'No preservatives', 'Safe for kids'],
+    category: 'spreads',
+    discountEnabled: false,
+    discountPercent: 0,
+    active: true,
   },
   {
     id: 'hazelnut-spread-delight',
@@ -56,6 +95,10 @@ export const products: Product[] = [
     image: assets.products.hazelnutSpread,
     accent: '#6b3a2e',
     highlights: ['Rich in protein', 'Rich in fiber', '100% gluten free'],
+    category: 'spreads',
+    discountEnabled: false,
+    discountPercent: 0,
+    active: true,
   },
   {
     id: 'choco-millet-delight',
@@ -70,6 +113,10 @@ export const products: Product[] = [
     image: assets.products.chocoMilletDelight,
     accent: '#5b2b82',
     highlights: ['Made with 9 grains', 'No artificial colours', 'Safe for kids'],
+    category: 'spreads',
+    discountEnabled: false,
+    discountPercent: 0,
+    active: true,
   },
   {
     id: 'choco-millet-fills',
@@ -83,6 +130,10 @@ export const products: Product[] = [
     image: assets.products.chocoMilletFillsBag,
     accent: '#e31c23',
     highlights: ['Good source of protein', 'Ragi, jowar & foxtail', 'Crunchy fills'],
+    category: 'millets',
+    discountEnabled: false,
+    discountPercent: 0,
+    active: true,
   },
   {
     id: 'family-delight-duo',
@@ -97,14 +148,18 @@ export const products: Product[] = [
     image: assets.promo.productShowcaseLavender,
     accent: '#ffd54a',
     highlights: ['No preservatives', 'Supports healthy growth', 'Nourish naturally'],
+    category: 'combos',
+    discountEnabled: false,
+    discountPercent: 0,
+    active: true,
   },
 ]
 
+/** Shop filter tabs (includes All). */
 export const categories = [
   { id: 'all', label: 'All' },
-  { id: 'spreads', label: 'Spreads' },
-  { id: 'millets', label: 'Millets' },
-  { id: 'packs', label: 'Gift packs' },
+  ...PRODUCT_CATEGORIES.filter((c) => c.id !== 'other'),
+  { id: 'other', label: 'Other' },
 ] as const
 
 export const benefits = [

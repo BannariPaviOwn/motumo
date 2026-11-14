@@ -2,12 +2,15 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
 } from 'react'
-import { products, type Product } from '../data/products'
+import type { Product } from '../data/products'
+import { getEffectivePrice } from '../lib/productPricing'
 import { playTigerCheer } from '../lib/tigerCheer'
+import { useProducts } from './ProductsContext'
 
 export type CartItem = {
   product: Product
@@ -32,6 +35,7 @@ type CartContextValue = {
 const CartContext = createContext<CartContextValue | null>(null)
 
 export function CartProvider({ children }: { children: ReactNode }) {
+  const { getProduct, isProductActive } = useProducts()
   const [items, setItems] = useState<CartItem[]>([])
   const [isOpen, setIsOpen] = useState(false)
   const [cheerId, setCheerId] = useState(0)
@@ -39,26 +43,51 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const openCart = useCallback(() => setIsOpen(true), [])
   const closeCart = useCallback(() => setIsOpen(false), [])
 
-  const addItem = useCallback((productId: string) => {
-    const product = products.find((p) => p.id === productId)
-    if (!product) return
-
+  // Drop inactive/deleted SKUs and refresh product snapshots (price/discount)
+  useEffect(() => {
     setItems((prev) => {
-      const existing = prev.find((item) => item.product.id === productId)
-      if (existing) {
-        return prev.map((item) =>
-          item.product.id === productId
-            ? { ...item, quantity: item.quantity + 1 }
-            : item,
-        )
+      let changed = false
+      const next: CartItem[] = []
+      for (const item of prev) {
+        const product = getProduct(item.product.id)
+        if (!product || !isProductActive(item.product.id)) {
+          changed = true
+          continue
+        }
+        if (product !== item.product) {
+          changed = true
+          next.push({ ...item, product })
+        } else {
+          next.push(item)
+        }
       }
-      return [...prev, { product, quantity: 1 }]
+      return changed ? next : prev
     })
-    setIsOpen(true)
-    setCheerId((n) => n + 1)
-    // Click handler = user gesture — audio play() is allowed
-    playTigerCheer()
-  }, [])
+  }, [getProduct, isProductActive])
+
+  const addItem = useCallback(
+    (productId: string) => {
+      const product = getProduct(productId)
+      if (!product || !product.active) return
+
+      setItems((prev) => {
+        const existing = prev.find((item) => item.product.id === productId)
+        if (existing) {
+          return prev.map((item) =>
+            item.product.id === productId
+              ? { ...item, quantity: item.quantity + 1 }
+              : item,
+          )
+        }
+        return [...prev, { product, quantity: 1 }]
+      })
+      setIsOpen(true)
+      setCheerId((n) => n + 1)
+      // Click handler = user gesture — audio play() is allowed
+      playTigerCheer()
+    },
+    [getProduct],
+  )
 
   const removeItem = useCallback((productId: string) => {
     setItems((prev) => prev.filter((item) => item.product.id !== productId))
@@ -83,7 +112,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   )
 
   const subtotal = useMemo(
-    () => items.reduce((sum, item) => sum + item.product.price * item.quantity, 0),
+    () =>
+      items.reduce(
+        (sum, item) => sum + getEffectivePrice(item.product) * item.quantity,
+        0,
+      ),
     [items],
   )
 

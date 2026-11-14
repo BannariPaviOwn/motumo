@@ -1,9 +1,11 @@
 import { ShoppingBag, ArrowUpRight } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { products } from '../data/products'
 import { assets } from '../lib/assets'
 import { useCart } from '../context/CartContext'
+import { useProducts } from '../context/ProductsContext'
+import { getEffectivePrice, hasActiveDiscount } from '../lib/productPricing'
 import { Logo } from '../components/Logo'
 
 function formatINR(value: number) {
@@ -14,18 +16,21 @@ function formatINR(value: number) {
   }).format(value)
 }
 
-const lookbook = products.filter((p) =>
-  [
-    'almond-spread-delight',
-    'peanut-spread-delight',
-    'hazelnut-spread-delight',
-    'choco-millet-delight',
-  ].includes(p.id),
-)
+const LOOKBOOK_IDS = [
+  'almond-spread-delight',
+  'peanut-spread-delight',
+  'hazelnut-spread-delight',
+  'choco-millet-delight',
+]
 
 /** Template 3 — premium light maison / boutique lookbook */
 export function Template3() {
   const { itemCount, openCart, addItem } = useCart()
+  const { activeProducts, isProductActive } = useProducts()
+  const lookbook = useMemo(
+    () => activeProducts.filter((p) => LOOKBOOK_IDS.includes(p.id)),
+    [activeProducts],
+  )
 
   return (
     <div className="min-h-svh bg-[#fffaf2] text-plum-deep">
@@ -204,11 +209,11 @@ export function Template3() {
                   <div className="mt-6 flex items-center justify-between gap-3">
                     <div>
                       <p className="font-display text-xl font-semibold text-plum">
-                        {formatINR(product.price)}
+                        {formatINR(getEffectivePrice(product))}
                       </p>
-                      {product.compareAt && (
+                      {hasActiveDiscount(product) && (
                         <p className="text-sm text-plum-soft line-through">
-                          {formatINR(product.compareAt)}
+                          {formatINR(product.price)}
                         </p>
                       )}
                     </div>
@@ -285,13 +290,15 @@ export function Template3() {
             Pair almond &amp; hazelnut, or build a millet + nut duo — wrapped in Motumo violet and
             sealed with a yellow smile.
           </p>
-          <button
-            type="button"
-            onClick={() => addItem('family-delight-duo')}
-            className="relative mt-8 inline-flex rounded-full bg-motumo-yellow px-8 py-3.5 font-display text-sm font-bold text-plum-deep transition hover:bg-white"
-          >
-            Add Family Duo · {formatINR(549)}
-          </button>
+          {isProductActive('family-delight-duo') && (
+            <button
+              type="button"
+              onClick={() => addItem('family-delight-duo')}
+              className="relative mt-8 inline-flex rounded-full bg-motumo-yellow px-8 py-3.5 font-display text-sm font-bold text-plum-deep transition hover:bg-white"
+            >
+              Add Family Duo · {formatINR(549)}
+            </button>
+          )}
         </div>
       </section>
 

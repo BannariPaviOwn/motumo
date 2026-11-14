@@ -30,6 +30,20 @@ Without Razorpay keys / API, checkout falls back to a clearly labeled **simulate
 
 Full setup: [docs/RAZORPAY_TEST.md](docs/RAZORPAY_TEST.md).
 
+## Admin (product activate / deactivate)
+
+Open **`/admin`** (Footer → Admin, or `http://localhost:5173/admin`).
+
+This is a **dev-only soft gate** (not real auth):
+
+| Unlock method | How |
+| ------------- | --- |
+| Password | Enter `motumo-admin` on the unlock screen |
+| Query param | Visit `/admin?unlock=motumo-admin` (auto-unlocks, then strips the param) |
+| Persist | Unlock sets `localStorage` key `motumo-admin-unlocked=1` |
+
+Toggles write active/inactive flags to `localStorage` (`motumo-product-active`) and merge over the static catalog in `src/data/products.ts`. Inactive products disappear from the public shop and cannot be added to cart.
+
 ## Build
 
 ```bash

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Logo } from './Logo'
 import { TigerMascot } from './TigerMascot'
 import { useOrders } from '../context/OrdersContext'
@@ -75,6 +76,11 @@ export function Footer() {
               >
                 Dev: Test Orders{orders.length > 0 ? ` (${orders.length})` : ''}
               </button>
+            </li>
+            <li>
+              <Link to="/admin" className="text-lavender-200/70 hover:text-white">
+                Admin
+              </Link>
             </li>
           </ul>
         </div>

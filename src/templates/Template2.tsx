@@ -1,9 +1,12 @@
 import { ShoppingBag } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { products, reviews } from '../data/products'
+import { reviews } from '../data/products'
 import { assets } from '../lib/assets'
 import { useCart } from '../context/CartContext'
+import { useProducts } from '../context/ProductsContext'
+import { getEffectivePrice, hasActiveDiscount } from '../lib/productPricing'
 import { Logo } from '../components/Logo'
 
 function formatINR(value: number) {
@@ -14,13 +17,20 @@ function formatINR(value: number) {
   }).format(value)
 }
 
-const featured = products.filter((p) =>
-  ['almond-spread-delight', 'peanut-spread-delight', 'hazelnut-spread-delight'].includes(p.id),
-)
+const FEATURED_IDS = [
+  'almond-spread-delight',
+  'peanut-spread-delight',
+  'hazelnut-spread-delight',
+]
 
 /** Template 2 — premium dark atelier / editorial */
 export function Template2() {
   const { itemCount, openCart, addItem } = useCart()
+  const { activeProducts } = useProducts()
+  const featured = useMemo(
+    () => activeProducts.filter((p) => FEATURED_IDS.includes(p.id)),
+    [activeProducts],
+  )
 
   return (
     <div className="min-h-svh bg-plum-deep text-cream">
@@ -190,11 +200,11 @@ export function Template2() {
                 <div className="flex flex-row items-center justify-between gap-4 sm:flex-col sm:items-end">
                   <div className="text-right">
                     <p className="font-display text-2xl font-semibold text-motumo-yellow">
-                      {formatINR(product.price)}
+                      {formatINR(getEffectivePrice(product))}
                     </p>
-                    {product.compareAt && (
+                    {hasActiveDiscount(product) && (
                       <p className="text-sm text-cream/40 line-through">
-                        {formatINR(product.compareAt)}
+                        {formatINR(product.price)}
                       </p>
                     )}
                   </div>

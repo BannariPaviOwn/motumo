@@ -1,4 +1,5 @@
 import type { CartItem } from '../context/CartContext'
+import { getEffectivePrice } from './productPricing'
 
 export const ORDERS_STORAGE_KEY = 'motumo-test-orders'
 
@@ -55,14 +56,17 @@ export function createOrderId() {
 }
 
 export function cartItemsToOrderLines(items: CartItem[]): OrderLineItem[] {
-  return items.map(({ product, quantity }) => ({
-    productId: product.id,
-    name: product.name,
-    weight: product.weight,
-    unitPrice: product.price,
-    quantity,
-    lineTotal: product.price * quantity,
-  }))
+  return items.map(({ product, quantity }) => {
+    const unitPrice = getEffectivePrice(product)
+    return {
+      productId: product.id,
+      name: product.name,
+      weight: product.weight,
+      unitPrice,
+      quantity,
+      lineTotal: unitPrice * quantity,
+    }
+  })
 }
 
 function normalizeOrder(raw: unknown): TestOrder | null {

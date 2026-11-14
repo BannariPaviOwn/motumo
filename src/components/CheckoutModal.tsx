@@ -26,6 +26,7 @@ import {
   verifyRazorpayPayment,
   type RazorpayStatusResponse,
 } from '../lib/razorpay'
+import { getEffectivePrice } from '../lib/productPricing'
 
 type FormErrors = Partial<Record<keyof OrderCustomer, string>>
 type GatewayMode = 'checking' | 'razorpay' | 'simulated' | 'api-down'
@@ -460,7 +461,7 @@ export function CheckoutModal() {
                             <span className="text-plum-soft">× {quantity}</span>
                           </span>
                           <span className="shrink-0 font-display font-semibold text-plum">
-                            {formatINR(product.price * quantity)}
+                            {formatINR(getEffectivePrice(product) * quantity)}
                           </span>
                         </li>
                       ))}

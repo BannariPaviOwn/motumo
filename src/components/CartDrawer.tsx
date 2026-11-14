@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useCart } from '../context/CartContext'
 import { useOrders } from '../context/OrdersContext'
 import { formatINR } from '../lib/orders'
+import { getEffectivePrice, hasActiveDiscount } from '../lib/productPricing'
 
 export function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, setQuantity, subtotal } = useCart()
@@ -106,9 +107,16 @@ export function CartDrawer() {
                               <Plus className="h-3.5 w-3.5" />
                             </button>
                           </div>
-                          <p className="font-display text-sm font-semibold text-plum">
-                            {formatINR(product.price * quantity)}
-                          </p>
+                          <div className="text-right">
+                            <p className="font-display text-sm font-semibold text-plum">
+                              {formatINR(getEffectivePrice(product) * quantity)}
+                            </p>
+                            {hasActiveDiscount(product) && (
+                              <p className="text-[11px] text-plum-soft line-through">
+                                {formatINR(product.price * quantity)}
+                              </p>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </li>
